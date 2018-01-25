@@ -27,6 +27,9 @@ class Page(models.Model):
     url = models.URLField()
     views = models.IntegerField(default=0)
 
+    class Meta:
+        verbose_name_plural = 'pages'
+
     def __str__(self):
         return self.title
     
