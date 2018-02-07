@@ -5,6 +5,8 @@ from rango.models import Page
 from rango.forms import CategoryForm
 from rango.forms import PageForm
 from rango.forms import UserForm, UserProfileForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 def index(request):
 
@@ -111,6 +113,22 @@ def register(request):
             print(user_form.errors, profile_form.errors)
 
     else:
+
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+
+    return render(request,
+                  'rango/register.html',
+                  {'user_form' : user_form,
+                   'profile_form': profile_form,
+                   'registered': registered})
         
 
-        
+@login_required
+def restricted(request):
+    return HttpResponse("Since you're logged in, you can see this text!")
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('index'))
