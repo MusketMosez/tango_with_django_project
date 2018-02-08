@@ -58,8 +58,9 @@ def about(request):
         request.session.delete_test_cookie()
     print(request.method)
     print(request.user)
-    ##context_dict = {'boldmessage': "Rango says hey there partner"}
-    return render(request, 'rango/about.html', {})
+    context_dict = {}
+    context_dict['visits'] = request.session['visits']
+    return render(request, 'rango/about.html', context_dict)
 
 def show_category(request, category_name_slug):
 
