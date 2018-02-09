@@ -126,7 +126,7 @@ def add_page(request, category_name_slug):
 def register(request):
     registered = False
 
-    if request.method == 'Post':
+    if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileForm(data=request.POST)
 
